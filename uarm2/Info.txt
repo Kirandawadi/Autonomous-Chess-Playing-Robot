@@ -1,0 +1,19 @@
+/*
+ * Info.txt
+ *
+ * Created: 6/29/2018 4:27:20 PM
+ *  Author: Kiran Dawadi
+ */ 
+
+	For Encoder:(In a continuous manner)
+	Vcc -> 5V
+	PhaseA -> INT0
+	PhaseB -> PB0
+	Gnd -> Gnd
+
+	Rotating Clockwise will decrease the dcounter value
+	Rotating Anti-clockwise will increase the dcounter value
+
+
+
+
