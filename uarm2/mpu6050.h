@@ -116,10 +116,10 @@ float mpu6050::angle()
 	//TCNT2=0;
 	counter=0;
 	
-	angle_gyro += Zg*del_x;					/* Convert temperature in °/c using formula */
+	angle_gyro += Yg*del_x;					/* Convert temperature in °/c using formula */
 	angle_yaw  += Xg*del_x;
 	double tot = sqrt(Xa*Xa+Ya*Ya+Za*Za);
-	float angle1 = asin((float)Ya/tot)*57.2957795130;
+	float angle1 = asin((float)Xa/tot)*57.2957795130;
 	if(set_gyro_angle)
 	{
 		angle_gyro = angle_gyro*0.96 +angle1*0.04;

@@ -29,6 +29,7 @@ extern uint8_t val_rec;
 extern volatile double dcounter;
 extern uint16_t angle;
 
+
 class PID
 {
 	public:
@@ -93,7 +94,6 @@ class PID
 		else if(pid < 0)motor = -400 - pid;
 		else motor = 0;
 		throttel = motor;
-		
 	}
 	
 	void stepper_counter()
@@ -184,9 +184,6 @@ class PID
 		motor_halt();
 	}
 };
-
-
-
 
 
 #endif /* PID_H_ */

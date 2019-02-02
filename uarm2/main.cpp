@@ -32,12 +32,12 @@ void clean_the_buffer(void);
 PID M1(motor_1,motor_1_dir);
 PID M2(motor_2,motor_2_dir);
 PID M3(motor_3,motor_3_dir);
-
 		
 int main(void)
 {   
 	sei();                                     //Global interrupt enable
 	float ang1=0,ang2=0;
+	int my_angle2 = 0 , my_angle1 = 0 , temp = 0;
 	uint16_t round_error = 0;
 	double degrees;
 	DDRC = 0xFF;				//Output side for motor controllers
@@ -54,7 +54,7 @@ int main(void)
     I2C_Init();
     mp1.Gyro_Init();
     mp2.Gyro_Init();
-	Servo_init();
+	//Servo_init();
 	TIMSK |= 1<<OCIE0 | 1<<OCIE2;             //Interrupt enable for Timer 0 and 2
 	TCCR2 |= 1<<WGM21 | 1<<CS21 | 1<<CS20;    //Prescaler 32,CTC mode
 	OCR2 =200;
@@ -69,19 +69,26 @@ int main(void)
     TCNT2 =0;
     while (1) 
     {
-		M3.set_position_degrees(pos);
+		//M3.set_position_degrees(pos);
 		ang1 = mp1.angle();
+		my_angle1 = (-1)*int(ang1);
 		ang2 = mp2.angle();
-		degrees = dcounter/11.8;
-		round_error = abs(angle - dcounter);
-   		M1.PID_calculate(ang1,q1);
-   		M2.PID_calculate(ang2,-q2);
-		   
-		    			/*	dtostrf(ang1, 3, 2, float_ );
-		    				sprintf(buffer,"mp1 angle = %s\t",float_);
-		   				USART_SendString(buffer);
+		my_angle2 = (-1)*int(ang2);					//If angle is in minus , send i before ending character
+		
+		//my_angle = abs(my_angle);
+		
+		    				//dtostrf(my_angle, 3, 2, float_ );
+		    				sprintf(buffer,"%d",my_angle1);
+		   				   USART_SendString(buffer);
+						   USART_SendString("m");
+						   _delay_us(100);
 						   
-						   dtostrf(ang2, 3, 2, float_ );
+						   sprintf(buffer,"%d",my_angle2);
+						   USART_SendString(buffer);
+						   USART_SendString("n");
+						   _delay_us(100);
+						   
+						  /* dtostrf(ang2, 3, 2, float_ );
 						   sprintf(buffer,"mp2 angle = %s\t",float_);
 						   USART_SendString(buffer);
 						   
@@ -93,13 +100,13 @@ int main(void)
 						    sprintf(buffer,"degrees = %s\n",float_);
 						    USART_SendString(buffer);*/
 
- if((abs(M1.pid_error)<=1) && (abs(M2.pid_error) <= 1)&&(round_error==0) &&(state==1))		//round_error is to be added
+ /*if((abs(M1.pid_error)<=1) && (abs(M2.pid_error) <= 1)&&(round_error==0) &&(state==1))		//round_error is to be added
 	 {
 		 USART_TxChar('1');
 		 //DDRC &= ~(1<<motor_3);			//if all has been okay ,stop the base motor
 		 //USART_SendString("\n");
 		 state=0;
-	}
+	}*/
 	}		
 	return 0;
 }
