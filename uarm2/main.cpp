@@ -73,7 +73,7 @@ int main(void)
 		ang1 = mp1.angle();
 		my_angle1 = (-1)*int(ang1);
 		ang2 = mp2.angle();
-		my_angle2 = (-1)*int(ang2);					//If angle is in minus , send i before ending character
+		my_angle2 = (-1)*int(ang2);			//If angle is in minus , send i before ending character
 		
 		//my_angle = abs(my_angle);
 		
