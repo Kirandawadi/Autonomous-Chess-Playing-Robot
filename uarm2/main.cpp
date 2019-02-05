@@ -47,13 +47,13 @@ int main(void)
 	MCUCR |= (1<<ISC00);		//Interrupt for both rising and falling edge
 	
 	/*Initialization of class mpu6050 with its write and read value*/
-	mpu6050 mp1(0xD0,0xD1);                  
-	mpu6050 mp2(0xD2,0xD3);  
+	//mpu6050 mp1(0xD0,0xD1);                  
+	//mpu6050 mp2(0xD2,0xD3);  
 	                    
 	USART_Init(38400);			//Initialize UART with 38400 baud
     I2C_Init();
-    mp1.Gyro_Init();
-    mp2.Gyro_Init();
+    //mp1.Gyro_Init();
+    //mp2.Gyro_Init();
 	//Servo_init();
 	TIMSK |= 1<<OCIE0 | 1<<OCIE2;             //Interrupt enable for Timer 0 and 2
 	TCCR2 |= 1<<WGM21 | 1<<CS21 | 1<<CS20;    //Prescaler 32,CTC mode
@@ -62,15 +62,17 @@ int main(void)
 	OCR0 =156;// 20us interrupt
 	
  	//USART_SendString("Calibrating your mpu6050....\n");
-  	mp1.Gyro_cal();
-    mp2.Gyro_cal();
+  	//mp1.Gyro_cal();
+    //mp2.Gyro_cal();
  	//USART_SendString("Done Calibrating \n");
 	
     TCNT2 =0;
     while (1) 
     {
-		//M3.set_position_degrees(pos);
-		ang1 = mp1.angle();
+		M3.set_position_degrees(25);
+		M1.PID_calculate(0,50);
+		M2.PID_calculate(50,0);
+		/*ang1 = mp1.angle();
 		my_angle1 = (-1)*int(ang1);
 		ang2 = mp2.angle();
 		my_angle2 = (-1)*int(ang2);			//If angle is in minus , send i before ending character
@@ -86,7 +88,7 @@ int main(void)
 						   sprintf(buffer,"%d",my_angle2);
 						   USART_SendString(buffer);
 						   USART_SendString("n");
-						   _delay_us(100);
+						   _delay_us(100);*/
 						   
 						  /* dtostrf(ang2, 3, 2, float_ );
 						   sprintf(buffer,"mp2 angle = %s\t",float_);
