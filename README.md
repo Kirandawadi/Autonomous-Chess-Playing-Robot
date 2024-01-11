@@ -2,4 +2,4 @@ YR-ARM is an autonomous robot that has a mechanical arm with embedded chess algo
 
 The project was awarded the winner of **Hardware Competition on LOCUS 2018** and **SRIJANA-The Innovation 2018**.
 
-Demo Video: https://drive.google.com/file/d/1l2GJEbQS91HmjIE-YSwWzNw7WMRcb-hu/view?usp=sharing
+**Demo Video:** https://drive.google.com/file/d/1l2GJEbQS91HmjIE-YSwWzNw7WMRcb-hu/view?usp=sharing
